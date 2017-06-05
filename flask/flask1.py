@@ -17,6 +17,10 @@ def about():
 def contact():
     return "this is my contact page"
 
+@app.route('/profile/<username>')
+def profile(username):
+    return "<h1>hey there,%s</h1>" %username
+    
 if __name__ == '__main__':
     app.run(debug=True)
 
