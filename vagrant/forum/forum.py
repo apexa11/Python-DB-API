@@ -35,3 +35,21 @@ HTML_WRAP = '''\
 POST = '''/
         <div class = post><em class = date>%s</em>%s</div>
       '''
+
+@app.route('/', methods=['GET'])
+def main():
+  posts = "".join(POST %(date,text) for date ,text in get_posts())
+  html = HTML_WRAP %posts
+  return html
+
+@app.route('/', methods=['POST'])
+def post():
+  message = request.form['content']
+  add_post(message)
+  return redirect(url_for('main'))
+
+if __name__ == '__main__':
+  app.run(host='0.0.0.0', port=8000)
+
+
+
